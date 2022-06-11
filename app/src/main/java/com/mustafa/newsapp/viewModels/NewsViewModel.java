@@ -2,11 +2,15 @@ package com.mustafa.newsapp.viewModels;
 
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.mustafa.newsapp.models.ArticlesModel;
 import com.mustafa.newsapp.models.HeadLinesModel;
 import com.mustafa.newsapp.repository.NewsRepository;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -16,11 +20,11 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 @HiltViewModel
 public class NewsViewModel extends ViewModel {
-    private static final String TAG="new view Model: ";
+    private static final String TAG = "new view Model: ";
 
     private NewsRepository repository;
-
-    private MutableLiveData<HeadLinesModel> headLines=new MutableLiveData<>();
+    private MutableLiveData<HeadLinesModel> headLines = new MutableLiveData<>();
+    private LiveData<List<ArticlesModel>> favorites = null;
 
     @Inject
     public NewsViewModel(NewsRepository repository) {
@@ -31,14 +35,26 @@ public class NewsViewModel extends ViewModel {
         return headLines;
     }
 
-    public void getHeadLinesFromRepository(){
+    public void getHeadLinesFromRepository() {
         repository.getHeadLines()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(headLinesModel -> {
                     headLines.setValue(headLinesModel);
-                },throwable -> {
-                    Log.d(TAG,throwable.toString());
+                }, throwable -> {
+                    Log.d(TAG, throwable.toString());
                 });
+    }
+
+    public void insertNewsFav(ArticlesModel articlesModel) {
+        repository.insertNews(articlesModel);
+    }
+
+    public void deleteFromFav(int id) {
+        repository.deletenews(id);
+    }
+
+    public void getFavNews() {
+        favorites = repository.getFavNews();
     }
 }
