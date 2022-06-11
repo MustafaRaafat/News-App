@@ -10,15 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mustafa.newsapp.R;
-import com.mustafa.newsapp.models.HeadLinesModel;
+import com.mustafa.newsapp.models.ArticlesModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HeadLinesAdapter extends RecyclerView.Adapter<HeadLinesAdapter.HeadLineHolder> {
-    private List<HeadLinesModel.Articles> data = new ArrayList<>();
+    private List<ArticlesModel> data = new ArrayList<>();
 
-    public void setData(List<HeadLinesModel.Articles> data) {
+    public void setData(List<ArticlesModel> data) {
         this.data = data;
         notifyDataSetChanged();
 
