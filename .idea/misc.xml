@@ -6,7 +6,9 @@
         <entry key="..\:/old_driver/AndroidStudioProjects/NewsApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/old_driver/AndroidStudioProjects/NewsApp/app/src/main/res/layout/activity_main.xml" value="0.19010416666666666" />
         <entry key="..\:/old_driver/AndroidStudioProjects/NewsApp/app/src/main/res/layout/breaking_news.xml" value="0.20416666666666666" />
+        <entry key="..\:/old_driver/AndroidStudioProjects/NewsApp/app/src/main/res/layout/favorites_item.xml" value="0.203125" />
         <entry key="..\:/old_driver/AndroidStudioProjects/NewsApp/app/src/main/res/layout/fragment_breaking_news.xml" value="0.1" />
+        <entry key="..\:/old_driver/AndroidStudioProjects/NewsApp/app/src/main/res/layout/fragment_favorites_news.xml" value="0.20416666666666666" />
         <entry key="..\:/old_driver/AndroidStudioProjects/NewsApp/app/src/main/res/layout/headlines_item.xml" value="0.11" />
       </map>
     </option>
