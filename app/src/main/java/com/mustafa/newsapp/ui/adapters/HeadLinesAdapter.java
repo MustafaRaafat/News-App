@@ -24,6 +24,10 @@ public class HeadLinesAdapter extends RecyclerView.Adapter<HeadLinesAdapter.Head
 
     }
 
+    public ArticlesModel getArticle(int position){
+        return data.get(position);
+    }
+
     @NonNull
     @Override
     public HeadLineHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

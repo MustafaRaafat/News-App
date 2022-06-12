@@ -1,6 +1,5 @@
 package com.mustafa.newsapp.repository;
 
-import androidx.lifecycle.LiveData;
 
 import com.mustafa.newsapp.db.NewsDAO;
 import com.mustafa.newsapp.models.ArticlesModel;
@@ -11,6 +10,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Observable;
 
 public class NewsRepository {
@@ -31,13 +31,13 @@ public class NewsRepository {
         return newsApiService.getHeadLineService("eg", ApiKey);
     }
 
-    public void insertNews(ArticlesModel articlesModel){
-        newsDAO.insertNews(articlesModel);
+    public Completable insertNews(ArticlesModel articlesModel){
+        return newsDAO.insertNews(articlesModel);
     }
     public void deletenews(int id){
         newsDAO.deleteNews(id);
     }
-    public LiveData<List<ArticlesModel>> getFavNews(){
+    public Observable<List<ArticlesModel>> getFavNews(){
         return newsDAO.getnews();
     }
 }

@@ -24,7 +24,7 @@ public class NewsViewModel extends ViewModel {
 
     private NewsRepository repository;
     private MutableLiveData<HeadLinesModel> headLines = new MutableLiveData<>();
-    private LiveData<List<ArticlesModel>> favorites = null;
+    private MutableLiveData<List<ArticlesModel>> favorites = new MutableLiveData<>();
 
     @Inject
     public NewsViewModel(NewsRepository repository) {
@@ -33,6 +33,10 @@ public class NewsViewModel extends ViewModel {
 
     public MutableLiveData<HeadLinesModel> getHeadLines() {
         return headLines;
+    }
+
+    public MutableLiveData<List<ArticlesModel>> getFavorites() {
+        return favorites;
     }
 
     public void getHeadLinesFromRepository() {
@@ -47,7 +51,9 @@ public class NewsViewModel extends ViewModel {
     }
 
     public void insertNewsFav(ArticlesModel articlesModel) {
-        repository.insertNews(articlesModel);
+        repository.insertNews(articlesModel)
+                .subscribeOn(Schedulers.io())
+                .subscribe();
     }
 
     public void deleteFromFav(int id) {
@@ -55,6 +61,13 @@ public class NewsViewModel extends ViewModel {
     }
 
     public void getFavNews() {
-        favorites = repository.getFavNews();
+        repository.getFavNews()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(articlesModels -> {
+                    favorites.setValue(articlesModels);
+                },throwable -> {
+                    Log.d(TAG,throwable.toString());
+                });
     }
 }

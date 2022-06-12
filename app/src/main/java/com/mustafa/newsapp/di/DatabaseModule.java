@@ -23,7 +23,6 @@ public class DatabaseModule {
     public static NewsDB provideDB(Application application) {
         return Room.databaseBuilder(application, NewsDB.class, "fav_DB")
                 .fallbackToDestructiveMigration()
-                .allowMainThreadQueries()
                 .build();
     }
 
